@@ -5,14 +5,15 @@ const app = express();
 const cors = require('cors')
 
 const pool = mysql.createPool({
-    host: '173.201.183.45',
-    user: 'i5888491_wp3',
-    password: 'M.w7agIybhjmFRnDfn108',
-    database: 'i5888491_wp3'
+    host: '216.137.190.180',
+    user: 'admin.d',
+    password: 'spiderman2023',
+    database: 'icohsa2_qschool'
 });
 
 pool.getConnection(function (error) {
     if (!!error) {
+        console.log(error)
         console.log("Error")
     } else {
         console.log("Conected")
@@ -93,5 +94,5 @@ app.get("/api/icohs/update", function (req, res) {
     })
 });
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 7822
 app.listen(port, () => {console.log(`running on port ${port}`)});
