@@ -37,11 +37,12 @@ app.post("/api/icohs/insert", (req, res) => {
     const personalDataLastName = req.body.personalDataLastName;
     const personalDataEmail = req.body.personalDataEmail;
     const personalDataPhone = req.body.personalDataPhone;
-    console.log(personalDataName," PERSONAL NAME")
+    console.log(step1," step1")
 
     const sqlInsert = "INSERT INTO `icohs-quiz` (`step1`, `step2`, `step3`, `step4`, `first_name`, `last_name`, `email`, `phone`) VALUES (? , ? , ? , ?, ?, ?, ?, ?)";
     pool.query(sqlInsert, [step1, step2, step3, step4, personalDataName, personalDataLastName, personalDataEmail, personalDataPhone], (error) => {
         if(error) {
+            console.log(error)
             res.json({status:"failure",reason: error.code});
         }else{
             res.json({status:"success"})
