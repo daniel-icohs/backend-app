@@ -8,12 +8,11 @@ const pool = mysql.createPool({
     host: '216.137.190.180',
     user: 'admin.d',
     password: 'spiderman2023',
-    database: 'icohsa2_qschool'
+    database: 'icohsa2_test'
 });
 
 pool.getConnection(function (error) {
     if (!!error) {
-        console.log(error)
         console.log("Error")
     } else {
         console.log("Conected")
@@ -28,7 +27,6 @@ app.use(bodyParser.urlencoded({extended: true})) ;
 
 app.post("/api/icohs/insert", (req, res) => {
 
-    console.log(req.body)
     const step1 = req.body.step1;
     const step2 = req.body.step2;
     const step3 = JSON.stringify(req.body.step3);
@@ -37,12 +35,10 @@ app.post("/api/icohs/insert", (req, res) => {
     const personalDataLastName = req.body.personalDataLastName;
     const personalDataEmail = req.body.personalDataEmail;
     const personalDataPhone = req.body.personalDataPhone;
-    console.log(step1," step1")
 
     const sqlInsert = "INSERT INTO `icohs-quiz` (`step1`, `step2`, `step3`, `step4`, `first_name`, `last_name`, `email`, `phone`) VALUES (? , ? , ? , ?, ?, ?, ?, ?)";
     pool.query(sqlInsert, [step1, step2, step3, step4, personalDataName, personalDataLastName, personalDataEmail, personalDataPhone], (error) => {
         if(error) {
-            console.log(error)
             res.json({status:"failure",reason: error.code});
         }else{
             res.json({status:"success"})
@@ -60,7 +56,6 @@ app.get("/api/icohs/get", function (req, res) {
             res.status(500).json(error)
         } else {
             console.log("SUCCES")
-            console.log(rows)
             res.status(200).json(rows);
         }
     })
@@ -75,7 +70,6 @@ app.get("/api/icohs/delete", function (req, res) {
             res.status(500).json(error)
         } else {
             console.log("SUCCES")
-            console.log(rows)
             res.status(200).json(rows);
         }
     })
@@ -89,7 +83,6 @@ app.get("/api/icohs/update", function (req, res) {
             res.status(500).json(error)
         } else {
             console.log("SUCCES")
-            console.log(rows)
             res.status(200).json(rows);
         }
     })
