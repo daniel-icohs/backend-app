@@ -13,6 +13,7 @@ const pool = mysql.createPool({
 
 pool.getConnection(function (error) {
     if (!!error) {
+        console.log(error)
         console.log("Error")
     } else {
         console.log("Conected")
@@ -39,6 +40,7 @@ app.post("/api/icohs/insert", (req, res) => {
     const sqlInsert = "INSERT INTO `icohs-quiz` (`step1`, `step2`, `step3`, `step4`, `first_name`, `last_name`, `email`, `phone`) VALUES (? , ? , ? , ?, ?, ?, ?, ?)";
     pool.query(sqlInsert, [step1, step2, step3, step4, personalDataName, personalDataLastName, personalDataEmail, personalDataPhone], (error) => {
         if(error) {
+            console.log(res.json(error))
             res.json({status:"failure",reason: error.code});
         }else{
             res.json({status:"success"})
